@@ -333,7 +333,33 @@ with app.app_context():
             Vocabulary(english="sleep", vietnamese="ngủ", example="I need to sleep early tonight."),
             Vocabulary(english="eat", vietnamese="ăn", example="Let's eat lunch together."),
             Vocabulary(english="drink", vietnamese="uống", example="Would you like to drink coffee?"),
-            Vocabulary(english="morning", vietnamese="buổi sáng", example="Good morning!")
+            Vocabulary(english="morning", vietnamese="buổi sáng", example="Good morning!"),
+            
+            # Additional Advanced Vocabulary
+            Vocabulary(english="sustainable", vietnamese="bền vững", example="We need sustainable energy sources."),
+            Vocabulary(english="innovation", vietnamese="đổi mới", example="Technology innovation is changing our lives."),
+            Vocabulary(english="comprehensive", vietnamese="toàn diện", example="The report provides a comprehensive analysis."),
+            Vocabulary(english="fundamental", vietnamese="cơ bản", example="These are the fundamental principles."),
+            Vocabulary(english="substantial", vietnamese="đáng kể", example="There is substantial evidence for this theory."),
+            Vocabulary(english="perspective", vietnamese="quan điểm", example="Consider it from a different perspective."),
+            Vocabulary(english="initiative", vietnamese="sáng kiến", example="The company launched a new initiative."),
+            Vocabulary(english="sophisticated", vietnamese="tinh vi", example="It's a sophisticated technology."),
+            Vocabulary(english="crucial", vietnamese="then chốt", example="This is a crucial moment in history."),
+            Vocabulary(english="integrity", vietnamese="tính toàn vẹn", example="Maintain your personal integrity."),
+            
+            # Professional Terminology
+            Vocabulary(english="collaborate", vietnamese="hợp tác", example="Let's collaborate on this project."),
+            Vocabulary(english="implement", vietnamese="thực hiện", example="We need to implement these changes."),
+            Vocabulary(english="analyze", vietnamese="phân tích", example="Analyze the data carefully."),
+            Vocabulary(english="facilitate", vietnamese="tạo điều kiện", example="The software facilitates communication."),
+            Vocabulary(english="coordinate", vietnamese="phối hợp", example="Coordinate with the marketing team."),
+            
+            # Academic Vocabulary
+            Vocabulary(english="thesis", vietnamese="luận văn", example="She's writing her doctoral thesis."),
+            Vocabulary(english="academic", vietnamese="học thuật", example="This is an academic discussion."),
+            Vocabulary(english="evaluation", vietnamese="đánh giá", example="Performance evaluation is next week."),
+            Vocabulary(english="interpretation", vietnamese="diễn giải", example="What's your interpretation of this data?"),
+            Vocabulary(english="critique", vietnamese="phê bình", example="Write a critique of the article.")
         ]
         db.session.add_all(initial_vocabulary)
         db.session.commit()
