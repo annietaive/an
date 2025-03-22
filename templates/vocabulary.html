@@ -1,3 +1,4 @@
+
 {% extends 'layout.html' %}
 
 {% block title %}Từ Vựng - Annie.py{% endblock %}
@@ -21,23 +22,23 @@
             <div class="vocabulary-list">
                 {% if vocab_items %}
                     {% for item in vocab_items %}
-                        <div class="vocab-item">
+                        <div class="vocab-item mb-3 p-3 border rounded">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="english-word">{{ item.english }}</span>
-                                    <button class="audio-btn" data-word="{{ item.english }}">
+                                    <span class="english-word h5">{{ item.english }}</span>
+                                    <button class="audio-btn btn btn-link" onclick="playAudio('{{ item.english }}')">
                                         <i class="fas fa-volume-up"></i>
                                     </button>
                                 </div>
                                 <span class="badge bg-info">Cơ bản</span>
                             </div>
-                            <div class="vietnamese-translation">{{ item.vietnamese }}</div>
-                            <div class="example-sentence">{{ item.example }}</div>
+                            <div class="vietnamese-translation text-muted mt-2">{{ item.vietnamese }}</div>
+                            <div class="example-sentence small mt-2 text-success">{{ item.example }}</div>
                         </div>
                     {% endfor %}
                 {% else %}
                     <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i> Không có từ vựng nào. Vui lòng thêm từ vựng vào cơ sở dữ liệu.
+                        <i class="fas fa-info-circle"></i> Không có từ vựng nào trong cơ sở dữ liệu.
                     </div>
                 {% endif %}
             </div>
@@ -62,31 +63,39 @@
                         <li class="list-group-item">
                             <i class="fas fa-check text-info"></i> Tạo flashcards để ôn tập
                         </li>
-                        <li class="list-group-item">
-                            <i class="fas fa-check text-info"></i> Làm bài tập và câu đố liên quan
-                        </li>
                     </ul>
-                </div>
-                <div class="card-footer">
-                    <a href="/exercises" class="btn btn-info w-100">Luyện tập ngay</a>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="mt-4 text-center">
-        <a href="/exercises" class="btn btn-primary me-2">
-            <i class="fas fa-tasks me-1"></i> Đến Bài Tập
-        </a>
-        <a href="/quiz" class="btn btn-info">
-            <i class="fas fa-question-circle me-1"></i> Làm Câu Đố
-        </a>
-    </div>
 </div>
-{% endblock %}
 
-{% block scripts %}
 <script>
-    // Vocabulary-specific JavaScript can go here
+function playAudio(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'en-US';
+    window.speechSynthesis.speak(utterance);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('vocabularySearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const vocabItems = document.querySelectorAll('.vocab-item');
+            
+            vocabItems.forEach(item => {
+                const english = item.querySelector('.english-word').textContent.toLowerCase();
+                const vietnamese = item.querySelector('.vietnamese-translation').textContent.toLowerCase();
+                
+                if (english.includes(searchTerm) || vietnamese.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+});
 </script>
 {% endblock %}

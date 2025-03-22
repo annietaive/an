@@ -329,9 +329,14 @@ def index():
 
 @app.route('/vocabulary')
 def vocabulary():
-    # Get all vocabulary items from the database
-    vocab_items = models.Vocabulary.query.all()
-    return render_template('vocabulary.html', vocab_items=vocab_items)
+    try:
+        # Get all vocabulary items from the database
+        vocab_items = models.Vocabulary.query.all()
+        app.logger.info(f"Found {len(vocab_items)} vocabulary items")
+        return render_template('vocabulary.html', vocab_items=vocab_items)
+    except Exception as e:
+        app.logger.error(f"Error fetching vocabulary: {str(e)}")
+        return render_template('vocabulary.html', vocab_items=[], error="Không thể tải từ vựng")
 
 @app.route('/exercises')
 def exercises():
