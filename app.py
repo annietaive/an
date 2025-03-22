@@ -41,6 +41,152 @@ with app.app_context():
         initial_vocabulary = [
             # Common Verbs
             Vocabulary(english="walk", vietnamese="đi bộ", example="I walk to school every day."),
+            Vocabulary(english="dance", vietnamese="nhảy múa", example="She loves to dance at parties."),
+            Vocabulary(english="swim", vietnamese="bơi lội", example="We swim in the pool every weekend."),
+            Vocabulary(english="sing", vietnamese="hát", example="He sings in a choir."),
+            Vocabulary(english="cook", vietnamese="nấu ăn", example="I cook dinner every evening."),
+            Vocabulary(english="paint", vietnamese="vẽ", example="The artist paints beautiful pictures."),
+            Vocabulary(english="jump", vietnamese="nhảy", example="Children jump with joy."),
+            Vocabulary(english="laugh", vietnamese="cười", example="We laugh at funny jokes."),
+            Vocabulary(english="cry", vietnamese="khóc", example="The baby cries when hungry."),
+            Vocabulary(english="sleep", vietnamese="ngủ", example="I sleep eight hours every night."),
+            
+            # Professions
+            Vocabulary(english="engineer", vietnamese="kỹ sư", example="He works as a software engineer."),
+            Vocabulary(english="nurse", vietnamese="y tá", example="The nurse takes care of patients."),
+            Vocabulary(english="chef", vietnamese="đầu bếp", example="The chef creates delicious meals."),
+            Vocabulary(english="pilot", vietnamese="phi công", example="The pilot flies large airplanes."),
+            Vocabulary(english="artist", vietnamese="nghệ sĩ", example="She is a talented artist."),
+            Vocabulary(english="dentist", vietnamese="nha sĩ", example="Visit the dentist twice a year."),
+            Vocabulary(english="lawyer", vietnamese="luật sư", example="The lawyer represents her clients."),
+            Vocabulary(english="architect", vietnamese="kiến trúc sư", example="The architect designs buildings."),
+            
+            # Colors
+            Vocabulary(english="red", vietnamese="màu đỏ", example="The rose is red."),
+            Vocabulary(english="blue", vietnamese="màu xanh dương", example="The sky is blue."),
+            Vocabulary(english="green", vietnamese="màu xanh lá", example="The grass is green."),
+            Vocabulary(english="yellow", vietnamese="màu vàng", example="The sun is yellow."),
+            Vocabulary(english="purple", vietnamese="màu tím", example="She wore a purple dress."),
+            Vocabulary(english="orange", vietnamese="màu cam", example="The orange fruit is orange."),
+            Vocabulary(english="brown", vietnamese="màu nâu", example="The tree trunk is brown."),
+            Vocabulary(english="pink", vietnamese="màu hồng", example="The flowers are pink."),
+            
+            # Animals
+            Vocabulary(english="elephant", vietnamese="con voi", example="The elephant is very large."),
+            Vocabulary(english="tiger", vietnamese="con hổ", example="The tiger is a wild cat."),
+            Vocabulary(english="penguin", vietnamese="chim cánh cụt", example="Penguins live in Antarctica."),
+            Vocabulary(english="dolphin", vietnamese="cá heo", example="Dolphins are intelligent animals."),
+            Vocabulary(english="giraffe", vietnamese="hươu cao cổ", example="The giraffe has a long neck."),
+            Vocabulary(english="monkey", vietnamese="con khỉ", example="Monkeys like bananas."),
+            Vocabulary(english="rabbit", vietnamese="con thỏ", example="The rabbit hops quickly."),
+            Vocabulary(english="snake", vietnamese="con rắn", example="The snake slithers on the ground."),
+            
+            # Food and Drinks
+            Vocabulary(english="pizza", vietnamese="bánh pizza", example="We ordered a pizza for dinner."),
+            Vocabulary(english="sushi", vietnamese="sushi", example="Japanese restaurants serve sushi."),
+            Vocabulary(english="coffee", vietnamese="cà phê", example="I drink coffee every morning."),
+            Vocabulary(english="juice", vietnamese="nước ép", example="Orange juice is healthy."),
+            Vocabulary(english="bread", vietnamese="bánh mì", example="I eat bread for breakfast."),
+            Vocabulary(english="rice", vietnamese="cơm", example="Rice is a staple food in Asia."),
+            Vocabulary(english="soup", vietnamese="súp", example="Hot soup is good when sick."),
+            Vocabulary(english="salad", vietnamese="sa lát", example="A fresh salad is healthy."),
+            
+            # Weather
+            Vocabulary(english="sunny", vietnamese="nắng", example="It's a sunny day today."),
+            Vocabulary(english="rainy", vietnamese="mưa", example="Bring an umbrella on rainy days."),
+            Vocabulary(english="cloudy", vietnamese="nhiều mây", example="The sky is cloudy."),
+            Vocabulary(english="windy", vietnamese="gió", example="It's very windy outside."),
+            Vocabulary(english="snowy", vietnamese="tuyết rơi", example="December is often snowy."),
+            Vocabulary(english="foggy", vietnamese="sương mù", example="Be careful driving in foggy weather."),
+            Vocabulary(english="stormy", vietnamese="bão", example="The sea is stormy today."),
+            
+            # Emotions
+            Vocabulary(english="excited", vietnamese="phấn khích", example="I'm excited about the party."),
+            Vocabulary(english="nervous", vietnamese="lo lắng", example="Students feel nervous before exams."),
+            Vocabulary(english="proud", vietnamese="tự hào", example="Parents are proud of their children."),
+            Vocabulary(english="confused", vietnamese="bối rối", example="The puzzle left me confused."),
+            Vocabulary(english="surprised", vietnamese="ngạc nhiên", example="I was surprised by the gift."),
+            Vocabulary(english="peaceful", vietnamese="bình yên", example="The garden is peaceful."),
+            
+            # Transportation
+            Vocabulary(english="bicycle", vietnamese="xe đạp", example="I ride my bicycle to work."),
+            Vocabulary(english="train", vietnamese="tàu hỏa", example="The train arrives at 9 AM."),
+            Vocabulary(english="airplane", vietnamese="máy bay", example="The airplane flies high."),
+            Vocabulary(english="bus", vietnamese="xe buýt", example="I take the bus to school."),
+            Vocabulary(english="taxi", vietnamese="taxi", example="Let's take a taxi home."),
+            Vocabulary(english="motorcycle", vietnamese="xe máy", example="He rides a motorcycle."),
+            
+            # Sports
+            Vocabulary(english="football", vietnamese="bóng đá", example="We play football on weekends."),
+            Vocabulary(english="basketball", vietnamese="bóng rổ", example="He's good at basketball."),
+            Vocabulary(english="tennis", vietnamese="quần vợt", example="Tennis is my favorite sport."),
+            Vocabulary(english="volleyball", vietnamese="bóng chuyền", example="They play volleyball at the beach."),
+            Vocabulary(english="baseball", vietnamese="bóng chày", example="Baseball is popular in America."),
+            Vocabulary(english="golf", vietnamese="golf", example="My father plays golf."),
+            
+            # School Subjects
+            Vocabulary(english="mathematics", vietnamese="toán học", example="I study mathematics."),
+            Vocabulary(english="science", vietnamese="khoa học", example="Science is interesting."),
+            Vocabulary(english="history", vietnamese="lịch sử", example="We learn history in school."),
+            Vocabulary(english="geography", vietnamese="địa lý", example="Geography teaches about countries."),
+            Vocabulary(english="literature", vietnamese="văn học", example="She loves literature class."),
+            Vocabulary(english="physics", vietnamese="vật lý", example="Physics is challenging."),
+            
+            # Technology
+            Vocabulary(english="internet", vietnamese="internet", example="We use the internet daily."),
+            Vocabulary(english="software", vietnamese="phần mềm", example="Install the new software."),
+            Vocabulary(english="website", vietnamese="trang web", example="Visit our website."),
+            Vocabulary(english="password", vietnamese="mật khẩu", example="Keep your password secret."),
+            Vocabulary(english="download", vietnamese="tải xuống", example="Download the file."),
+            Vocabulary(english="upload", vietnamese="tải lên", example="Upload your photos."),
+            
+            # Body Parts
+            Vocabulary(english="head", vietnamese="đầu", example="I have a headache."),
+            Vocabulary(english="hand", vietnamese="tay", example="Wash your hands."),
+            Vocabulary(english="foot", vietnamese="chân", example="My foot hurts."),
+            Vocabulary(english="eye", vietnamese="mắt", example="She has blue eyes."),
+            Vocabulary(english="nose", vietnamese="mũi", example="The nose helps us smell."),
+            Vocabulary(english="mouth", vietnamese="miệng", example="Open your mouth wide."),
+            
+            # Furniture
+            Vocabulary(english="table", vietnamese="bàn", example="Put the book on the table."),
+            Vocabulary(english="chair", vietnamese="ghế", example="Sit in the chair."),
+            Vocabulary(english="bed", vietnamese="giường", example="The bed is comfortable."),
+            Vocabulary(english="desk", vietnamese="bàn làm việc", example="I work at my desk."),
+            Vocabulary(english="sofa", vietnamese="ghế sofa", example="Relax on the sofa."),
+            Vocabulary(english="closet", vietnamese="tủ quần áo", example="Hang clothes in the closet."),
+            
+            # Nature
+            Vocabulary(english="mountain", vietnamese="núi", example="We climb mountains."),
+            Vocabulary(english="river", vietnamese="sông", example="The river flows to the sea."),
+            Vocabulary(english="forest", vietnamese="rừng", example="Many animals live in the forest."),
+            Vocabulary(english="beach", vietnamese="bãi biển", example="We swim at the beach."),
+            Vocabulary(english="flower", vietnamese="hoa", example="The flower smells sweet."),
+            Vocabulary(english="tree", vietnamese="cây", example="Birds live in trees."),
+            
+            # Time
+            Vocabulary(english="minute", vietnamese="phút", example="Wait a minute."),
+            Vocabulary(english="hour", vietnamese="giờ", example="One hour has passed."),
+            Vocabulary(english="day", vietnamese="ngày", example="Have a nice day."),
+            Vocabulary(english="month", vietnamese="tháng", example="January is the first month."),
+            Vocabulary(english="year", vietnamese="năm", example="Happy New Year."),
+            Vocabulary(english="century", vietnamese="thế kỷ", example="A century is 100 years."),
+            
+            # Clothing
+            Vocabulary(english="shirt", vietnamese="áo sơ mi", example="He wears a white shirt."),
+            Vocabulary(english="pants", vietnamese="quần", example="These pants are too long."),
+            Vocabulary(english="dress", vietnamese="váy", example="She wore a beautiful dress."),
+            Vocabulary(english="shoes", vietnamese="giày", example="My shoes are black."),
+            Vocabulary(english="hat", vietnamese="mũ", example="Wear a hat in the sun."),
+            Vocabulary(english="jacket", vietnamese="áo khoác", example="It's cold, wear a jacket."),
+            
+            # Family
+            Vocabulary(english="mother", vietnamese="mẹ", example="I love my mother."),
+            Vocabulary(english="father", vietnamese="cha", example="My father works hard."),
+            Vocabulary(english="sister", vietnamese="chị/em gái", example="My sister is older than me."),
+            Vocabulary(english="brother", vietnamese="anh/em trai", example="I have two brothers."),
+            Vocabulary(english="grandmother", vietnamese="bà", example="Visit grandmother on Sunday."),
+            Vocabulary(english="grandfather", vietnamese="ông", example="Grandfather tells great stories.")
             Vocabulary(english="run", vietnamese="chạy", example="He runs every morning."),
             Vocabulary(english="write", vietnamese="viết", example="She writes beautiful poems."),
             Vocabulary(english="read", vietnamese="đọc", example="I read books before bed."),
