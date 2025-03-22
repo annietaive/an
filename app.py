@@ -340,7 +340,20 @@ with app.app_context():
     
     if not Exercise.query.first():
         initial_exercises = [
-            Exercise(question="Complete: 'Hello, ____ are you?'", answer="how", options="how,what,where,why"),
+            # Basic Level
+            Exercise(question="Complete: 'Hello, ____ are you?'", answer="how", options="how,what,where,why", difficulty="basic"),
+            Exercise(question="Choose the correct verb: 'She ____ to school.'", answer="goes", options="goes,go,going,gone", difficulty="basic"),
+            Exercise(question="Fill in: 'I ____ a student.'", answer="am", options="am,is,are,be", difficulty="basic"),
+            
+            # Intermediate Level  
+            Exercise(question="Select the past tense: 'Yesterday, I ____ a movie.'", answer="watched", options="watched,watch,watching,watches", difficulty="intermediate"),
+            Exercise(question="Choose: 'If I ____ rich, I would travel.'", answer="were", options="were,was,am,be", difficulty="intermediate"),
+            Exercise(question="Complete: 'She has ____ studying for hours.'", answer="been", options="been,be,being,is", difficulty="intermediate"),
+            
+            # Advanced Level
+            Exercise(question="Fill in: 'Had I ____ earlier, I wouldn't have been late.'", answer="left", options="left,leave,leaving,leaves", difficulty="advanced"),
+            Exercise(question="Choose: 'The project ____ by next week.'", answer="will have been completed", options="will have been completed,will complete,will be completing,completes", difficulty="advanced"),
+            Exercise(question="Select: 'Not only ____ the exam, but she also got the highest score.'", answer="did she pass", options="did she pass,she passed,passing,has she passed", difficulty="advanced"),
             Exercise(question="Choose the correct verb: 'She ____ to school every day.'", answer="walks", options="walks,walking,walked,walk"),
             Exercise(question="Fill in: 'They ____ studying English.'", answer="are", options="are,is,am,be"),
             Exercise(question="Select the opposite of 'happy':", answer="sad", options="sad,angry,tired,excited"),
@@ -377,7 +390,20 @@ with app.app_context():
     
     if not Quiz.query.first():
         initial_quizzes = [
-            Quiz(question="What time expression means 'ngày mai'?", answer="tomorrow", options="tomorrow,today,yesterday,next week"),
+            # Basic Level
+            Quiz(question="What time expression means 'ngày mai'?", answer="tomorrow", options="tomorrow,today,yesterday,next week", difficulty="basic"),
+            Quiz(question="Which word means 'thức ăn'?", answer="food", options="food,drink,water,meal", difficulty="basic"),
+            Quiz(question="Select the meaning of 'mèo':", answer="cat", options="cat,dog,bird,fish", difficulty="basic"),
+            
+            # Intermediate Level
+            Quiz(question="Choose the word for 'tự tin':", answer="confident", options="confident,shy,brave,strong", difficulty="intermediate"),
+            Quiz(question="'Kiên nhẫn' translates to:", answer="patient", options="patient,kind,gentle,calm", difficulty="intermediate"),
+            Quiz(question="What does 'thành công' mean?", answer="success", options="success,victory,achievement,win", difficulty="intermediate"),
+            
+            # Advanced Level
+            Quiz(question="Select the translation for 'phân tích':", answer="analyze", options="analyze,study,research,examine", difficulty="advanced"),
+            Quiz(question="'Giả thuyết' means:", answer="hypothesis", options="hypothesis,theory,idea,concept", difficulty="advanced"),
+            Quiz(question="What is 'kiên cường' in English?", answer="resilient", options="resilient,strong,tough,persistent", difficulty="advanced"),
             Quiz(question="Which word means 'thức ăn'?", answer="food", options="food,drink,water,meal"),
             Quiz(question="Select the correct translation for 'gia đình':", answer="family", options="family,friend,house,home"),
             Quiz(question="What is 'thời tiết' in English?", answer="weather", options="weather,season,climate,temperature"),

@@ -22,12 +22,14 @@ class Exercise(db.Model):
     question = db.Column(db.String(255), nullable=False)
     answer = db.Column(db.String(100), nullable=False)
     options = db.Column(db.String(255))  # Comma-separated options
+    difficulty = db.Column(db.String(20), default='basic')  # basic, intermediate, advanced
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(255), nullable=False)
     answer = db.Column(db.String(100), nullable=False)
     options = db.Column(db.String(255))  # Comma-separated options
+    difficulty = db.Column(db.String(20), default='basic')  # basic, intermediate, advanced
 
 class Progress(db.Model):
     id = db.Column(db.Integer, primary_key=True)
