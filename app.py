@@ -366,10 +366,14 @@ def exercises():
     if len(all_exercises) > 10:
         selected_exercises = random.sample(all_exercises, 10)
     else:
-        selected_exercises = all_exercises
+        selected_exercises = all_exercises.copy()
+        random.shuffle(selected_exercises)
         
     for exercise in selected_exercises:
-        exercise.options_list = exercise.options.split(',')
+        # Randomize options for each exercise
+        options_list = exercise.options.split(',')
+        random.shuffle(options_list)
+        exercise.options_list = options_list
     
     return render_template('exercises.html', exercises=selected_exercises)
 
@@ -381,10 +385,14 @@ def quiz():
     if len(all_quizzes) > 10:
         selected_quizzes = random.sample(all_quizzes, 10)
     else:
-        selected_quizzes = all_quizzes
+        selected_quizzes = all_quizzes.copy()
+        random.shuffle(selected_quizzes)
         
     for quiz in selected_quizzes:
-        quiz.options_list = quiz.options.split(',')
+        # Randomize options for each quiz
+        options_list = quiz.options.split(',')
+        random.shuffle(options_list)
+        quiz.options_list = options_list
     
     return render_template('quiz.html', quizzes=selected_quizzes)
 
