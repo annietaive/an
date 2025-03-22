@@ -121,21 +121,31 @@ with app.app_context():
     if not Exercise.query.first():
         initial_exercises = [
             Exercise(question="Complete: 'Hello, ____ are you?'", answer="how", options="how,what,where,why"),
-            Exercise(question="Translate: 'Xin chào'", answer="hello", options="hello,hi,hey,good"),
-            Exercise(question="Fill in: 'I want to ____ you.'", answer="thank", options="thank,help,meet,see"),
-            Exercise(question="Choose the correct word: 'I am ____ for being late.'", answer="sorry", options="sorry,sad,happy,angry"),
-            Exercise(question="Complete: '_____ help me, please.'", answer="Please", options="Please,Can,Will,Should")
+            Exercise(question="Choose the correct verb: 'She ____ to school every day.'", answer="walks", options="walks,walking,walked,walk"),
+            Exercise(question="Fill in: 'They ____ studying English.'", answer="are", options="are,is,am,be"),
+            Exercise(question="Select the opposite of 'happy':", answer="sad", options="sad,angry,tired,excited"),
+            Exercise(question="Complete: 'I ____ coffee every morning.'", answer="drink", options="drink,drinks,drinking,drank"),
+            Exercise(question="Choose the correct plural: 'One child, two ____'", answer="children", options="children,childs,childrens,child"),
+            Exercise(question="Fill in: 'The weather is ____ today.'", answer="beautiful", options="beautiful,beautifully,beauty,beautify"),
+            Exercise(question="Select the past tense: 'I ____ to the park yesterday.'", answer="went", options="went,go,going,gone"),
+            Exercise(question="Complete: '____ you speak English?'", answer="Can", options="Can,Do,Are,Will"),
+            Exercise(question="Choose the correct time: 'It's half ____ ten.'", answer="past", options="past,to,at,in")
         ]
         db.session.add_all(initial_exercises)
         db.session.commit()
     
     if not Quiz.query.first():
         initial_quizzes = [
-            Quiz(question="What is 'xin chào' in English?", answer="hello", options="hello,goodbye,thank you,please"),
-            Quiz(question="Which word means 'cảm ơn' in English?", answer="thank you", options="thank you,sorry,please,excuse me"),
-            Quiz(question="Select the correct translation for 'tạm biệt':", answer="goodbye", options="goodbye,hello,yes,no"),
-            Quiz(question="'Xin lỗi' translates to which English word?", answer="sorry", options="sorry,thank you,please,excuse me"),
-            Quiz(question="What does 'làm ơn' mean in English?", answer="please", options="please,thank you,excuse me,sorry")
+            Quiz(question="What time expression means 'ngày mai'?", answer="tomorrow", options="tomorrow,today,yesterday,next week"),
+            Quiz(question="Which word means 'thức ăn'?", answer="food", options="food,drink,water,meal"),
+            Quiz(question="Select the correct translation for 'gia đình':", answer="family", options="family,friend,house,home"),
+            Quiz(question="What is 'thời tiết' in English?", answer="weather", options="weather,season,climate,temperature"),
+            Quiz(question="Choose the correct word for 'công việc':", answer="work", options="work,job,task,duty"),
+            Quiz(question="'Trường học' translates to which word?", answer="school", options="school,college,class,study"),
+            Quiz(question="What does 'bác sĩ' mean?", answer="doctor", options="doctor,nurse,teacher,dentist"),
+            Quiz(question="Select the translation for 'máy tính':", answer="computer", options="computer,phone,laptop,tablet"),
+            Quiz(question="'Thư viện' means which place?", answer="library", options="library,bookstore,school,office"),
+            Quiz(question="Choose the correct sport for 'bơi lội':", answer="swimming", options="swimming,running,walking,flying")
         ]
         db.session.add_all(initial_quizzes)
         db.session.commit()
