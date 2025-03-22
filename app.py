@@ -301,7 +301,17 @@ with app.app_context():
             Exercise(question="Fill in: 'The weather is ____ today.'", answer="beautiful", options="beautiful,beautifully,beauty,beautify"),
             Exercise(question="Select the past tense: 'I ____ to the park yesterday.'", answer="went", options="went,go,going,gone"),
             Exercise(question="Complete: '____ you speak English?'", answer="Can", options="Can,Do,Are,Will"),
-            Exercise(question="Choose the correct time: 'It's half ____ ten.'", answer="past", options="past,to,at,in")
+            Exercise(question="Choose the correct time: 'It's half ____ ten.'", answer="past", options="past,to,at,in"),
+            Exercise(question="Select the correct preposition: 'He is waiting ____ the bus.'", answer="for", options="for,at,in,on"),
+            Exercise(question="Choose the correct adjective: 'The elephant is ____.'", answer="big", options="big,bigger,biggest,biggly"),
+            Exercise(question="Fill in: 'She ____ her homework yesterday.'", answer="did", options="did,do,done,doing"),
+            Exercise(question="Complete: 'They ____ to the movies last week.'", answer="went", options="went,go,gone,going"),
+            Exercise(question="Select the correct form: '____ she like pizza?'", answer="Does", options="Does,Do,Did,Done"),
+            Exercise(question="Choose the correct word: 'I have ____ cats.'", answer="two", options="two,second,twice,double"),
+            Exercise(question="Fill in: 'The sun ____ in the east.'", answer="rises", options="rises,rise,rising,risen"),
+            Exercise(question="Complete: '____ book is very interesting.'", answer="This", options="This,These,That,Those"),
+            Exercise(question="Select the correct word: 'She is ____ than me.'", answer="taller", options="taller,tall,tallest,tally"),
+            Exercise(question="Choose the right answer: 'We ____ lunch at noon.'", answer="have", options="have,has,had,having")
         ]
         db.session.add_all(initial_exercises)
         db.session.commit()
@@ -317,7 +327,17 @@ with app.app_context():
             Quiz(question="What does 'bác sĩ' mean?", answer="doctor", options="doctor,nurse,teacher,dentist"),
             Quiz(question="Select the translation for 'máy tính':", answer="computer", options="computer,phone,laptop,tablet"),
             Quiz(question="'Thư viện' means which place?", answer="library", options="library,bookstore,school,office"),
-            Quiz(question="Choose the correct sport for 'bơi lội':", answer="swimming", options="swimming,running,walking,flying")
+            Quiz(question="Choose the correct sport for 'bơi lội':", answer="swimming", options="swimming,running,walking,flying"),
+            Quiz(question="What is 'quả táo' in English?", answer="apple", options="apple,orange,banana,grape"),
+            Quiz(question="Select the translation for 'màu đỏ':", answer="red", options="red,blue,green,yellow"),
+            Quiz(question="'Mèo' translates to which animal?", answer="cat", options="cat,dog,bird,fish"),
+            Quiz(question="What does 'xe đạp' mean?", answer="bicycle", options="bicycle,car,bus,train"),
+            Quiz(question="Choose the word for 'điện thoại':", answer="phone", options="phone,computer,tablet,laptop"),
+            Quiz(question="'Quần áo' means which item?", answer="clothes", options="clothes,shoes,hat,bag"),
+            Quiz(question="What is 'bút chì' in English?", answer="pencil", options="pencil,pen,book,paper"),
+            Quiz(question="Select the meaning of 'cửa sổ':", answer="window", options="window,door,wall,roof"),
+            Quiz(question="'Bàn' translates to which furniture?", answer="table", options="table,chair,bed,desk"),
+            Quiz(question="What does 'sách' mean?", answer="book", options="book,notebook,magazine,newspaper")
         ]
         db.session.add_all(initial_quizzes)
         db.session.commit()
@@ -342,9 +362,9 @@ def vocabulary():
 def exercises():
     # Get all exercises from the database
     all_exercises = models.Exercise.query.all()
-    # Select 5 random exercises to display
-    if len(all_exercises) > 5:
-        selected_exercises = random.sample(all_exercises, 5)
+    # Select 10 random exercises to display
+    if len(all_exercises) > 10:
+        selected_exercises = random.sample(all_exercises, 10)
     else:
         selected_exercises = all_exercises
         
@@ -357,9 +377,9 @@ def exercises():
 def quiz():
     # Get all quizzes from the database
     all_quizzes = models.Quiz.query.all()
-    # Select 5 random quizzes to display
-    if len(all_quizzes) > 5:
-        selected_quizzes = random.sample(all_quizzes, 5)
+    # Select 10 random quizzes to display
+    if len(all_quizzes) > 10:
+        selected_quizzes = random.sample(all_quizzes, 10)
     else:
         selected_quizzes = all_quizzes
         
