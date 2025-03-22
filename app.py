@@ -342,22 +342,14 @@ with app.app_context():
     
     if not Quiz.query.first():
         initial_quizzes = [
-            Quiz(question="Khi bạn nói 'Hẹn gặp lại ngày mai!' với bạn bè, từ nào bạn sẽ dùng?", answer="tomorrow", options="tomorrow,today,yesterday,next week"),
-            Quiz(question="Bạn đang đói và muốn ăn. Từ nào dùng để nói về 'thức ăn'?", answer="food", options="food,drink,water,meal"),
-            Quiz(question="Trong bức ảnh này có bố, mẹ và các con. Đây là gì?", answer="family", options="family,friend,house,home"),
-            Quiz(question="Hôm nay trời rất đẹp! Từ nào dùng để nói về 'thời tiết'?", answer="weather", options="weather,season,climate,temperature"),
-            Quiz(question="Annie rất vui vì hoàn thành 'công việc' sớm. Từ nào phù hợp?", answer="work", options="work,job,task,duty"),
-            Quiz(question="Mỗi sáng, Tom đến đâu để học bài? (trường học)", answer="school", options="school,college,class,study"),
-            Quiz(question="Khi bị ốm, bạn cần gặp ai? (bác sĩ)", answer="doctor", options="doctor,nurse,teacher,dentist"),
-            Quiz(question="Sarah đang làm bài tập trên gì? (máy tính)", answer="computer", options="computer,phone,laptop,tablet"),
-            Quiz(question="Con vật nào kêu 'meow meow'? (mèo)", answer="cat", options="cat,dog,mouse,rabbit"),
-            Quiz(question="Món quà này màu gì? (màu đỏ)", answer="red", options="red,blue,green,yellow"),
-            Quiz(question="Buổi sáng, bạn thường chào nhau bằng từ gì?", answer="hello", options="hello,goodbye,thanks,bye"),
-            Quiz(question="Khi nhận được quà, bạn nói gì?", answer="thank you", options="thank you,hello,sorry,goodbye"),
-            Quiz(question="Đây là quả gì? Nó màu đỏ và rất ngọt! (táo)", answer="apple", options="apple,orange,banana,grape"),
-            Quiz(question="Bạn dùng gì để đọc sách? (sách)", answer="book", options="book,pen,pencil,paper"),
-            Quiz(question="Khi mệt mỏi, bạn cần phải làm gì? (ngủ)", answer="sleep", options="sleep,run,walk,jump")
-        ]
+            Quiz(question="What time expression means 'ngày mai'?", answer="tomorrow", options="tomorrow,today,yesterday,next week"),
+            Quiz(question="Which word means 'thức ăn'?", answer="food", options="food,drink,water,meal"),
+            Quiz(question="Select the correct translation for 'gia đình':", answer="family", options="family,friend,house,home"),
+            Quiz(question="What is 'thời tiết' in English?", answer="weather", options="weather,season,climate,temperature"),
+            Quiz(question="Choose the correct word for 'công việc':", answer="work", options="work,job,task,duty"),
+            Quiz(question="'Trường học' translates to which word?", answer="school", options="school,college,class,study"),
+            Quiz(question="What does 'bác sĩ' mean?", answer="doctor", options="doctor,nurse,teacher,dentist"),
+            Quiz(question="Select the translation for 'máy tính':", answer="computer", options="computer,phone,laptop,tablet"),
             Quiz(question="'Thư viện' means which place?", answer="library", options="library,bookstore,school,office"),
             Quiz(question="Choose the correct sport for 'bơi lội':", answer="swimming", options="swimming,running,walking,flying"),
             Quiz(question="What is 'quả táo' in English?", answer="apple", options="apple,orange,banana,grape"),
