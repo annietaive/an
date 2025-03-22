@@ -1,4 +1,3 @@
-
 {% extends 'layout.html' %}
 
 {% block title %}Kiểm Tra Phát Âm - Annie.py{% endblock %}
@@ -6,7 +5,7 @@
 {% block content %}
 <div class="container">
     <h1 class="mb-4">Kiểm Tra Phát Âm</h1>
-    
+
     <div class="card mb-4">
         <div class="card-body">
             <p>Luyện phát âm bằng cách đọc các từ sau. Nhấn nút để bắt đầu ghi âm và kiểm tra phát âm của bạn.</p>
@@ -68,41 +67,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     recordButton.addEventListener('click', async function() {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             recordingStatus.classList.remove('d-none');
             recordButton.disabled = true;
 
-            const mediaRecorder = new MediaRecorder(stream);
-            const audioChunks = [];
-
-            let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
             recognition.lang = 'en-US';
             recognition.continuous = false;
             recognition.interimResults = false;
 
-            mediaRecorder.addEventListener("dataavailable", event => {
-                audioChunks.push(event.data);
-            });
-
-            mediaRecorder.start();
             recognition.start();
 
             recognition.onresult = function(event) {
                 const spokenText = event.results[0][0].transcript.toLowerCase();
                 const confidence = event.results[0][0].confidence;
                 let score = Math.round(confidence * 100);
-                
-                // Calculate Levenshtein distance
-                const distance = levenshteinDistance(spokenText, wordToSpeak.toLowerCase());
-                const maxLength = Math.max(spokenText.length, wordToSpeak.length);
-                const similarity = Math.max(0, ((maxLength - distance) / maxLength) * 100);
-                
-                // Combine confidence and similarity scores
+
+                // Calculate similarity
+                const similarity = calculateSimilarity(spokenText, wordToSpeak.toLowerCase());
                 score = Math.round((score + similarity) / 2);
-                
+
                 const resultDiv = document.createElement('div');
                 resultDiv.className = 'mt-3 text-center';
-                
+
                 let feedback;
                 if (score >= 90) {
                     feedback = {
@@ -129,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         message: 'Hãy thử lại'
                     };
                 }
-                
+
                 resultDiv.innerHTML = `
                     <div class="alert ${feedback.class}">
                         <h5>${feedback.title}</h5>
@@ -146,39 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <small>Độ chính xác phát âm</small>
                     </div>
                 `;
-                
-                document.querySelector('.pronunciation-checker .card-body').appendChild(resultDiv);
-            };
 
-            // Levenshtein distance calculation
-            function levenshteinDistance(a, b) {
-                if (a.length === 0) return b.length;
-                if (b.length === 0) return a.length;
-
-                const matrix = [];
-                for (let i = 0; i <= b.length; i++) {
-                    matrix[i] = [i];
-                }
-                for (let j = 0; j <= a.length; j++) {
-                    matrix[0][j] = j;
-                }
-
-                for (let i = 1; i <= b.length; i++) {
-                    for (let j = 1; j <= a.length; j++) {
-                        if (b.charAt(i - 1) === a.charAt(j - 1)) {
-                            matrix[i][j] = matrix[i - 1][j - 1];
-                        } else {
-                            matrix[i][j] = Math.min(
-                                matrix[i - 1][j - 1] + 1,
-                                matrix[i][j - 1] + 1,
-                                matrix[i - 1][j] + 1
-                            );
-                        }
-                    }
-                }
-                return matrix[b.length][a.length];
-            }
-                
                 document.querySelector('.pronunciation-checker .card-body').appendChild(resultDiv);
             };
 
@@ -186,9 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Speech recognition error:', event.error);
                 alert('Có lỗi xảy ra khi nhận dạng giọng nói. Vui lòng thử lại.');
             };
-            
+
             setTimeout(() => {
-                mediaRecorder.stop();
                 recognition.stop();
                 stream.getTracks().forEach(track => track.stop());
                 recordingStatus.classList.add('d-none');
@@ -196,10 +150,27 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 3000);
 
         } catch (err) {
+            console.error('Error:', err);
             alert('Vui lòng cho phép truy cập microphone để sử dụng tính năng này.');
-            console.error(err);
+            recordingStatus.classList.add('d-none');
+            recordButton.disabled = false;
         }
     });
+
+    function calculateSimilarity(str1, str2) {
+        const len1 = str1.length;
+        const len2 = str2.length;
+        const maxLen = Math.max(len1, len2);
+        let matches = 0;
+
+        for (let i = 0; i < maxLen; i++) {
+            if (str1[i] === str2[i]) {
+                matches++;
+            }
+        }
+
+        return (matches / maxLen) * 100;
+    }
 });
 </script>
 {% endblock %}
