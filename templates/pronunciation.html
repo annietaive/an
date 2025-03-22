@@ -1,0 +1,98 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}Kiểm Tra Phát Âm - Annie.py{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Kiểm Tra Phát Âm</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>Luyện phát âm bằng cách đọc các từ sau. Nhấn nút để bắt đầu ghi âm và kiểm tra phát âm của bạn.</p>
+        </div>
+    </div>
+
+    <div class="pronunciation-checker mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="word-to-pronounce mb-3">Hello</h3>
+                <div class="d-flex justify-content-center gap-3">
+                    <button id="listenButton" class="btn btn-info">
+                        <i class="fas fa-volume-up"></i> Nghe mẫu
+                    </button>
+                    <button id="recordButton" class="btn btn-primary">
+                        <i class="fas fa-microphone"></i> Bắt đầu ghi âm
+                    </button>
+                </div>
+                <div id="recordingStatus" class="text-center mt-3 d-none">
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="visually-hidden">Đang ghi âm...</span>
+                    </div>
+                    <p>Đang ghi âm...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h4>Hướng dẫn</h4>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <i class="fas fa-info-circle text-info"></i> Nhấn "Nghe mẫu" để nghe cách phát âm chuẩn
+            </li>
+            <li class="list-group-item">
+                <i class="fas fa-microphone text-info"></i> Nhấn "Bắt đầu ghi âm" và đọc từ hiển thị
+            </li>
+            <li class="list-group-item">
+                <i class="fas fa-check text-info"></i> Hệ thống sẽ tự động dừng ghi âm sau 3 giây
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const listenButton = document.getElementById('listenButton');
+    const recordButton = document.getElementById('recordButton');
+    const recordingStatus = document.getElementById('recordingStatus');
+    const wordToSpeak = document.querySelector('.word-to-pronounce').textContent;
+
+    listenButton.addEventListener('click', function() {
+        const utterance = new SpeechSynthesisUtterance(wordToSpeak);
+        utterance.lang = 'en-US';
+        speechSynthesis.speak(utterance);
+    });
+
+    recordButton.addEventListener('click', async function() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            recordingStatus.classList.remove('d-none');
+            recordButton.disabled = true;
+
+            const mediaRecorder = new MediaRecorder(stream);
+            const audioChunks = [];
+
+            mediaRecorder.addEventListener("dataavailable", event => {
+                audioChunks.push(event.data);
+            });
+
+            mediaRecorder.start();
+            
+            setTimeout(() => {
+                mediaRecorder.stop();
+                stream.getTracks().forEach(track => track.stop());
+                recordingStatus.classList.add('d-none');
+                recordButton.disabled = false;
+            }, 3000);
+
+        } catch (err) {
+            alert('Vui lòng cho phép truy cập microphone để sử dụng tính năng này.');
+            console.error(err);
+        }
+    });
+});
+</script>
+{% endblock %}

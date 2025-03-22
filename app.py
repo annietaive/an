@@ -209,6 +209,10 @@ def progress():
                            quiz_results=quiz_results,
                            overall_percentage=overall_percentage)
 
+@app.route('/pronunciation')
+def pronunciation():
+    return render_template('pronunciation.html')
+
 @app.route('/resources')
 def resources():
     return render_template('resources.html')
