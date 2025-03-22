@@ -342,11 +342,21 @@ with app.app_context():
     
     if not Quiz.query.first():
         initial_quizzes = [
-            Quiz(question="What time expression means 'ngày mai'?", answer="tomorrow", options="tomorrow,today,yesterday,next week"),
-            Quiz(question="Which word means 'thức ăn'?", answer="food", options="food,drink,water,meal"),
-            Quiz(question="Select the correct translation for 'gia đình':", answer="family", options="family,friend,house,home"),
-            Quiz(question="What is 'thời tiết' in English?", answer="weather", options="weather,season,climate,temperature"),
-            Quiz(question="Choose the correct word for 'công việc':", answer="work", options="work,job,task,duty"),
+            Quiz(question="Nếu bạn muốn nói 'Hẹn gặp lại vào ngày mai' bằng tiếng Anh, bạn sẽ dùng từ nào?", answer="tomorrow", options="tomorrow,today,yesterday,next week"),
+            Quiz(question="Bạn đang đói và muốn nói 'Mình muốn ăn một chút'. Từ nào bạn cần để nói về 'thức ăn'?", answer="food", options="food,drink,water,meal"),
+            Quiz(question="Trong bức ảnh này có ba người: bố, mẹ và em bé. Đây là một...", answer="family", options="family,friend,house,home"),
+            Quiz(question="Sáng nay trời rất đẹp! Từ nào dùng để nói về 'thời tiết'?", answer="weather", options="weather,season,climate,temperature"),
+            Quiz(question="Annie rất vui vì hôm nay hoàn thành 'công việc' sớm. Từ tiếng Anh nào đúng?", answer="work", options="work,job,task,duty"),
+            Quiz(question="Bạn đang chơi trốn tìm và muốn đếm: 'một, hai, ba...' bằng tiếng Anh. Từ nào là 'một'?", answer="one", options="one,two,three,four"),
+            Quiz(question="Bạn thấy một chú chó dễ thương và muốn nói 'Chú chó này rất nhỏ!'. 'Chó' trong tiếng Anh là?", answer="dog", options="dog,cat,bird,rabbit"),
+            Quiz(question="Annie thích màu của bầu trời. Đó là màu...", answer="blue", options="blue,red,green,yellow"),
+            Quiz(question="Hôm nay là một ngày 'vui vẻ'. Chọn từ tiếng Anh phù hợp:", answer="happy", options="happy,sad,angry,tired"),
+            Quiz(question="Annie đang học bài. Cô ấy là một...", answer="student", options="student,teacher,doctor,nurse"),
+            Quiz(question="Bạn muốn cảm ơn ai đó. Bạn sẽ nói...", answer="thank you", options="thank you,hello,goodbye,sorry"),
+            Quiz(question="Khi gặp bạn mới, bạn chào họ bằng từ...", answer="hello", options="hello,goodbye,thanks,please"),
+            Quiz(question="Annie thích ăn quả táo đỏ. 'Táo' trong tiếng Anh là:", answer="apple", options="apple,orange,banana,grape"),
+            Quiz(question="Bạn đang đọc một quyển... thú vị", answer="book", options="book,pen,pencil,paper"),
+            Quiz(question="Mèo con đang ngủ ngon. 'Mèo' tiếng Anh là:", answer="cat", options="cat,dog,mouse,rabbit")
             Quiz(question="'Trường học' translates to which word?", answer="school", options="school,college,class,study"),
             Quiz(question="What does 'bác sĩ' mean?", answer="doctor", options="doctor,nurse,teacher,dentist"),
             Quiz(question="Select the translation for 'máy tính':", answer="computer", options="computer,phone,laptop,tablet"),
