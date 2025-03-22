@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block title %}Bài Tập - Annie.py{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Bài Tập Tiếng Anh</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>Hoàn thành các bài tập dưới đây để rèn luyện kỹ năng tiếng Anh của bạn. Mỗi câu trả lời đúng sẽ giúp bạn cải thiện điểm số và tiến độ học tập.</p>
+        </div>
+    </div>
+    
+    <form id="exerciseForm" action="/check_exercise" method="post">
+        <div class="alert alert-warning d-none" id="validationMessage">
+            <i class="fas fa-exclamation-triangle"></i> Vui lòng trả lời tất cả các câu hỏi trước khi nộp bài.
+        </div>
+        
+        {% if exercises %}
+            {% for exercise in exercises %}
+                <div class="card mb-4 quiz-question">
+                    <div class="card-body">
+                        <h5 class="card-title">Câu hỏi {{ loop.index }}:</h5>
+                        <p class="card-text">{{ exercise.question }}</p>
+                        
+                        {% if exercise.options_list %}
+                            <div class="option-container">
+                                {% for option in exercise.options_list %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="exercise_{{ exercise.id }}" 
+                                               id="exercise_{{ exercise.id }}_{{ loop.index }}" value="{{ option }}" required>
+                                        <label class="option-label form-check-label" for="exercise_{{ exercise.id }}_{{ loop.index }}">
+                                            {{ option }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="exercise_{{ exercise.id }}" required 
+                                       placeholder="Nhập câu trả lời của bạn">
+                            </div>
+                        {% endif %}
+                        
+                        <div class="answer d-none text-success">
+                            <strong>Đáp án đúng:</strong> {{ exercise.answer }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <button type="button" id="showAnswersBtn" class="btn btn-outline-info" onclick="showExerciseAnswers()">
+                    <i class="fas fa-eye"></i> Xem đáp án
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Nộp bài
+                </button>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Không có bài tập nào. Vui lòng thêm bài tập vào cơ sở dữ liệu.
+            </div>
+        {% endif %}
+    </form>
+    
+    <div class="mt-5">
+        <h4>Bạn có thể thích</h4>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Từ vựng</h5>
+                        <p class="card-text">Học từ vựng mới để nâng cao vốn từ tiếng Anh của bạn.</p>
+                        <a href="/vocabulary" class="btn btn-outline-info">Đến từ vựng</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Câu đố</h5>
+                        <p class="card-text">Kiểm tra kiến thức của bạn với các câu đố thú vị.</p>
+                        <a href="/quiz" class="btn btn-outline-info">Làm câu đố</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Tài liệu</h5>
+                        <p class="card-text">Khám phá các tài liệu học tiếng Anh hữu ích.</p>
+                        <a href="/resources" class="btn btn-outline-info">Xem tài liệu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

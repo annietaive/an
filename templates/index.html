@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+{% block title %}Annie.py - Học Tiếng Anh Online{% endblock %}
+
+{% block content %}
+<div class="banner text-center text-light">
+    <div class="container">
+        <h1 class="display-4">Chào mừng đến với Annie.py</h1>
+        <p class="lead">Nền tảng học tiếng Anh trực tuyến miễn phí dành cho người Việt</p>
+        <div class="mt-4">
+            <a href="/vocabulary" class="btn btn-info mx-2">Bắt đầu học ngay</a>
+            <a href="/resources" class="btn btn-outline-secondary mx-2">Tài liệu học tập</a>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="container">
+        <h2 class="text-center mb-4">Tại sao chọn Annie.py?</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-globe fa-3x mb-3 text-info"></i>
+                        <h3 class="card-title">Học mọi lúc, mọi nơi</h3>
+                        <p class="card-text">Truy cập bài học từ bất kỳ thiết bị nào, mọi lúc mọi nơi. Không cần tải ứng dụng.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-headphones fa-3x mb-3 text-info"></i>
+                        <h3 class="card-title">Phát âm chuẩn</h3>
+                        <p class="card-text">Luyện nghe và phát âm với audio chuẩn giúp bạn phát âm đúng từ đầu.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line fa-3x mb-3 text-info"></i>
+                        <h3 class="card-title">Theo dõi tiến độ</h3>
+                        <p class="card-text">Xem tiến độ học tập của bạn và luôn biết những gì cần cải thiện.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-5 py-5 bg-dark">
+    <div class="container">
+        <h2 class="text-center mb-4">Các tính năng của Annie.py</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-book text-info me-3 mt-1" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h4>Từ vựng phong phú</h4>
+                        <p>Danh sách từ vựng tiếng Anh phong phú với phát âm và ví dụ sử dụng trong ngữ cảnh.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-tasks text-info me-3 mt-1" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h4>Bài tập đa dạng</h4>
+                        <p>Các bài tập từ cơ bản đến nâng cao giúp bạn luyện tập và củng cố kiến thức.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-question-circle text-info me-3 mt-1" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h4>Câu đố thú vị</h4>
+                        <p>Làm các câu đố để kiểm tra hiểu biết và ghi nhớ từ vựng lâu hơn.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-bookmark text-info me-3 mt-1" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h4>Tài liệu học tập</h4>
+                        <p>Tổng hợp các tài liệu học tiếng Anh chất lượng từ nhiều nguồn khác nhau.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Bắt đầu hành trình học tiếng Anh cùng Annie.py</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <p class="lead">Học tiếng Anh chưa bao giờ dễ dàng và thú vị đến thế!</p>
+                        <a href="/vocabulary" class="btn btn-info btn-lg mt-3">Bắt đầu ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

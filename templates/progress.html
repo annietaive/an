@@ -1,0 +1,181 @@
+{% extends 'layout.html' %}
+
+{% block title %}Tiến Độ - Annie.py{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Tiến Độ Học Tập</h1>
+    
+    <div class="row">
+        <div class="col-md-8">
+            {% if exercise_results or quiz_results %}
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Tóm tắt tiến độ</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <h6>Bài tập:</h6>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar" role="progressbar" 
+                                         style="width: {{ exercise_results.percentage }}%;" 
+                                         aria-valuenow="{{ exercise_results.percentage }}" 
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        {{ exercise_results.percentage|round|int }}%
+                                    </div>
+                                </div>
+                                <small>Đúng {{ exercise_results.correct }}/{{ exercise_results.total }} câu</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h6>Câu đố:</h6>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar" role="progressbar" 
+                                         style="width: {{ quiz_results.percentage }}%;" 
+                                         aria-valuenow="{{ quiz_results.percentage }}" 
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        {{ quiz_results.percentage|round|int }}%
+                                    </div>
+                                </div>
+                                <small>Đúng {{ quiz_results.correct }}/{{ quiz_results.total }} câu</small>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <h5>Tổng điểm: {{ overall_percentage|round|int }}%</h5>
+                            <div class="progress" style="height: 2rem;">
+                                <div class="progress-bar bg-info" role="progressbar" 
+                                     style="width: {{ overall_percentage }}%;" 
+                                     aria-valuenow="{{ overall_percentage }}" 
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    {{ overall_percentage|round|int }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if exercise_results.details %}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Chi tiết bài tập</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for result in exercise_results.details %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Câu hỏi {{ loop.index }}
+                                        {% if result.correct %}
+                                            <span class="badge bg-success rounded-pill correct">
+                                                <i class="fas fa-check"></i> Đúng
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-danger rounded-pill incorrect">
+                                                <i class="fas fa-times"></i> Sai (Đáp án: {{ result.answer }})
+                                            </span>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% if quiz_results.details %}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Chi tiết câu đố</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for result in quiz_results.details %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Câu đố {{ loop.index }}
+                                        {% if result.correct %}
+                                            <span class="badge bg-success rounded-pill correct">
+                                                <i class="fas fa-check"></i> Đúng
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-danger rounded-pill incorrect">
+                                                <i class="fas fa-times"></i> Sai (Đáp án: {{ result.answer }})
+                                            </span>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                <div class="text-center mt-4">
+                    <a href="/exercises" class="btn btn-info me-2">
+                        <i class="fas fa-tasks me-1"></i> Luyện tập thêm
+                    </a>
+                    <a href="/quiz" class="btn btn-primary">
+                        <i class="fas fa-question-circle me-1"></i> Làm thêm câu đố
+                    </a>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> Bạn chưa hoàn thành bài tập hoặc câu đố nào. Hãy bắt đầu học ngay!
+                </div>
+                <div class="text-center mt-4">
+                    <a href="/exercises" class="btn btn-info me-2">
+                        <i class="fas fa-tasks me-1"></i> Bắt đầu với bài tập
+                    </a>
+                    <a href="/quiz" class="btn btn-primary">
+                        <i class="fas fa-question-circle me-1"></i> Thử làm câu đố
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Phân tích tiến độ</h5>
+                </div>
+                <div class="card-body">
+                    <div style="height: 250px;">
+                        <canvas id="progressChart" 
+                                data-exercise-percentage="{{ exercise_results.percentage|default(0) }}" 
+                                data-quiz-percentage="{{ quiz_results.percentage|default(0) }}">
+                        </canvas>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h6>Gợi ý cải thiện</h6>
+                    <ul class="list-group list-group-flush">
+                        {% if overall_percentage < 50 %}
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right text-info"></i> Hãy ôn lại từ vựng cơ bản
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right text-info"></i> Luyện tập thêm với bài tập đơn giản
+                            </li>
+                        {% elif overall_percentage < 80 %}
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right text-info"></i> Tập trung vào các câu đố khó
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right text-info"></i> Học thêm từ vựng mới
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right text-info"></i> Làm thêm nhiều bài tập nâng cao
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-arrow-right text-info"></i> Thử thách bản thân với các câu đố khó
+                            </li>
+                        {% endif %}
+                        <li class="list-group-item">
+                            <i class="fas fa-arrow-right text-info"></i> Thực hành nghe và phát âm thường xuyên
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

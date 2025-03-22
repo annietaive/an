@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block title %}Từ Vựng - Annie.py{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Từ Vựng Tiếng Anh</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>Dưới đây là danh sách từ vựng tiếng Anh cơ bản. Bạn có thể nhấn vào biểu tượng loa để nghe cách phát âm.</p>
+            <div class="input-group mb-3">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                <input type="text" id="vocabularySearch" class="form-control" placeholder="Tìm kiếm từ vựng...">
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="vocabulary-list">
+                {% if vocab_items %}
+                    {% for item in vocab_items %}
+                        <div class="vocab-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="english-word">{{ item.english }}</span>
+                                    <button class="audio-btn" data-word="{{ item.english }}">
+                                        <i class="fas fa-volume-up"></i>
+                                    </button>
+                                </div>
+                                <span class="badge bg-info">Cơ bản</span>
+                            </div>
+                            <div class="vietnamese-translation">{{ item.vietnamese }}</div>
+                            <div class="example-sentence">{{ item.example }}</div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Không có từ vựng nào. Vui lòng thêm từ vựng vào cơ sở dữ liệu.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Mẹo học từ vựng</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="fas fa-check text-info"></i> Học và ôn tập đều đặn mỗi ngày
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check text-info"></i> Luyện nghe và phát âm thường xuyên
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check text-info"></i> Sử dụng từ vựng trong câu để nhớ lâu
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check text-info"></i> Tạo flashcards để ôn tập
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check text-info"></i> Làm bài tập và câu đố liên quan
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="/exercises" class="btn btn-info w-100">Luyện tập ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4 text-center">
+        <a href="/exercises" class="btn btn-primary me-2">
+            <i class="fas fa-tasks me-1"></i> Đến Bài Tập
+        </a>
+        <a href="/quiz" class="btn btn-info">
+            <i class="fas fa-question-circle me-1"></i> Làm Câu Đố
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Vocabulary-specific JavaScript can go here
+</script>
+{% endblock %}

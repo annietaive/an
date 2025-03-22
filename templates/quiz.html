@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block title %}Câu Đố - Annie.py{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Câu Đố Tiếng Anh</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>Hãy kiểm tra kiến thức của bạn với các câu đố tiếng Anh dưới đây. Chọn đáp án đúng cho mỗi câu hỏi.</p>
+        </div>
+    </div>
+    
+    <form id="quizForm" action="/check_quiz" method="post">
+        <div class="alert alert-warning d-none" id="validationMessage">
+            <i class="fas fa-exclamation-triangle"></i> Vui lòng trả lời tất cả các câu hỏi trước khi nộp bài.
+        </div>
+        
+        {% if quizzes %}
+            {% for quiz in quizzes %}
+                <div class="card mb-4 quiz-question">
+                    <div class="card-body">
+                        <h5 class="card-title">Câu đố {{ loop.index }}:</h5>
+                        <p class="card-text">{{ quiz.question }}</p>
+                        
+                        <div class="option-container">
+                            {% for option in quiz.options_list %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="quiz_{{ quiz.id }}" 
+                                           id="quiz_{{ quiz.id }}_{{ loop.index }}" value="{{ option }}" required>
+                                    <label class="option-label form-check-label" for="quiz_{{ quiz.id }}_{{ loop.index }}">
+                                        {{ option }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="answer d-none text-success">
+                            <strong>Đáp án đúng:</strong> {{ quiz.answer }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <button type="button" id="showAnswersBtn" class="btn btn-outline-info" onclick="showQuizAnswers()">
+                    <i class="fas fa-eye"></i> Xem đáp án
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Nộp bài
+                </button>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Không có câu đố nào. Vui lòng thêm câu đố vào cơ sở dữ liệu.
+            </div>
+        {% endif %}
+    </form>
+    
+    <div class="mt-5">
+        <h4>Mẹo làm câu đố</h4>
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <i class="fas fa-lightbulb text-warning"></i> Đọc kỹ câu hỏi trước khi chọn đáp án
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-lightbulb text-warning"></i> Loại trừ các đáp án không phù hợp
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-lightbulb text-warning"></i> Nếu không biết, hãy chọn đáp án có vẻ hợp lý nhất
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-lightbulb text-warning"></i> Sau khi làm xong, kiểm tra lại các câu trả lời
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4 text-center">
+        <a href="/exercises" class="btn btn-info me-2">
+            <i class="fas fa-tasks me-1"></i> Đến Bài Tập
+        </a>
+        <a href="/vocabulary" class="btn btn-primary">
+            <i class="fas fa-book me-1"></i> Học Từ Vựng
+        </a>
+    </div>
+</div>
+{% endblock %}

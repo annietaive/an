@@ -1,0 +1,140 @@
+/* Custom styles for Annie.py - Adding to Bootstrap base */
+
+/* Global styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--bs-info);
+}
+
+.banner {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, var(--bs-dark) 0%, var(--bs-dark) 100%);
+    margin-bottom: 2rem;
+}
+
+/* Card styles */
+.feature-card {
+    transition: transform 0.3s ease;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Vocabulary item styles */
+.vocab-item {
+    border-left: 4px solid var(--bs-info);
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.english-word {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.vietnamese-translation {
+    font-style: italic;
+    color: var(--bs-secondary);
+}
+
+.example-sentence {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Audio button */
+.audio-btn {
+    background: none;
+    border: none;
+    color: var(--bs-info);
+    cursor: pointer;
+}
+
+/* Progress bar customization */
+.progress {
+    height: 1.5rem;
+    background-color: var(--bs-dark);
+}
+
+.progress-bar {
+    background-color: var(--bs-info);
+}
+
+/* Quiz and Exercise styles */
+.quiz-question {
+    background-color: rgba(var(--bs-info-rgb), 0.1);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.option-label {
+    display: block;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--bs-secondary);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.option-label:hover {
+    background-color: rgba(var(--bs-secondary-rgb), 0.2);
+}
+
+input[type="radio"]:checked + .option-label {
+    background-color: rgba(var(--bs-info-rgb), 0.2);
+    border-color: var(--bs-info);
+}
+
+/* Result styling */
+.correct {
+    color: var(--bs-success);
+}
+
+.incorrect {
+    color: var(--bs-danger);
+}
+
+/* Resources section */
+.resource-link {
+    display: block;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    background-color: rgba(var(--bs-secondary-rgb), 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.resource-link:hover {
+    background-color: rgba(var(--bs-secondary-rgb), 0.2);
+    text-decoration: none;
+}
+
+/* Footer styles */
+footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    background-color: var(--bs-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .banner {
+        padding: 2rem 0;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+}
