@@ -48,7 +48,27 @@ with app.app_context():
             Vocabulary(english="no", vietnamese="không", example="No, I don't understand."),
             Vocabulary(english="good", vietnamese="tốt", example="The weather is good today."),
             Vocabulary(english="bad", vietnamese="tồi", example="I had a bad day."),
-            Vocabulary(english="friend", vietnamese="bạn bè", example="She is my best friend.")
+            Vocabulary(english="friend", vietnamese="bạn bè", example="She is my best friend."),
+            Vocabulary(english="family", vietnamese="gia đình", example="I love my family."),
+            Vocabulary(english="happy", vietnamese="vui vẻ", example="I am happy to see you."),
+            Vocabulary(english="sad", vietnamese="buồn", example="She feels sad today."),
+            Vocabulary(english="food", vietnamese="thức ăn", example="The food is delicious."),
+            Vocabulary(english="water", vietnamese="nước", example="I need some water."),
+            Vocabulary(english="book", vietnamese="sách", example="I'm reading a good book."),
+            Vocabulary(english="school", vietnamese="trường học", example="The school is closed today."),
+            Vocabulary(english="house", vietnamese="nhà", example="This is my house."),
+            Vocabulary(english="car", vietnamese="xe hơi", example="He drives a new car."),
+            Vocabulary(english="time", vietnamese="thời gian", example="What time is it?"),
+            Vocabulary(english="weather", vietnamese="thời tiết", example="The weather is nice today."),
+            Vocabulary(english="beautiful", vietnamese="đẹp", example="She has a beautiful smile."),
+            Vocabulary(english="difficult", vietnamese="khó khăn", example="This problem is difficult."),
+            Vocabulary(english="easy", vietnamese="dễ dàng", example="The test was easy."),
+            Vocabulary(english="work", vietnamese="công việc", example="I have work to do."),
+            Vocabulary(english="study", vietnamese="học tập", example="I study English every day."),
+            Vocabulary(english="sleep", vietnamese="ngủ", example="I need to sleep early tonight."),
+            Vocabulary(english="eat", vietnamese="ăn", example="Let's eat lunch together."),
+            Vocabulary(english="drink", vietnamese="uống", example="Would you like to drink coffee?"),
+            Vocabulary(english="morning", vietnamese="buổi sáng", example="Good morning!")
         ]
         db.session.add_all(initial_vocabulary)
         db.session.commit()
