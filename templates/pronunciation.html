@@ -90,29 +90,94 @@ document.addEventListener('DOMContentLoaded', function() {
             recognition.onresult = function(event) {
                 const spokenText = event.results[0][0].transcript.toLowerCase();
                 const confidence = event.results[0][0].confidence;
-                const score = Math.round(confidence * 100);
+                let score = Math.round(confidence * 100);
+                
+                // Calculate Levenshtein distance
+                const distance = levenshteinDistance(spokenText, wordToSpeak.toLowerCase());
+                const maxLength = Math.max(spokenText.length, wordToSpeak.length);
+                const similarity = Math.max(0, ((maxLength - distance) / maxLength) * 100);
+                
+                // Combine confidence and similarity scores
+                score = Math.round((score + similarity) / 2);
                 
                 const resultDiv = document.createElement('div');
                 resultDiv.className = 'mt-3 text-center';
                 
-                if (spokenText === wordToSpeak.toLowerCase()) {
-                    resultDiv.innerHTML = `
-                        <div class="alert alert-success">
-                            <h5>Tuyệt vời! 🎉</h5>
-                            <p>Phát âm chính xác</p>
-                            <p>Điểm: ${score}/100</p>
-                        </div>
-                    `;
+                let feedback;
+                if (score >= 90) {
+                    feedback = {
+                        class: 'alert-success',
+                        title: 'Tuyệt vời! 🎉',
+                        message: 'Phát âm hoàn hảo!'
+                    };
+                } else if (score >= 75) {
+                    feedback = {
+                        class: 'alert-info',
+                        title: 'Rất tốt! 👍',
+                        message: 'Phát âm khá chính xác'
+                    };
+                } else if (score >= 60) {
+                    feedback = {
+                        class: 'alert-warning',
+                        title: 'Tạm được',
+                        message: 'Cần cải thiện một chút'
+                    };
                 } else {
-                    resultDiv.innerHTML = `
-                        <div class="alert alert-warning">
-                            <h5>Gần đúng</h5>
-                            <p>Bạn nói: "${spokenText}"</p>
-                            <p>Từ đúng: "${wordToSpeak}"</p>
-                            <p>Điểm: ${score}/100</p>
-                        </div>
-                    `;
+                    feedback = {
+                        class: 'alert-danger',
+                        title: 'Cần cố gắng hơn',
+                        message: 'Hãy thử lại'
+                    };
                 }
+                
+                resultDiv.innerHTML = `
+                    <div class="alert ${feedback.class}">
+                        <h5>${feedback.title}</h5>
+                        <p>${feedback.message}</p>
+                        <p>Bạn nói: "${spokenText}"</p>
+                        <p>Từ đúng: "${wordToSpeak}"</p>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-${score >= 75 ? 'success' : score >= 60 ? 'warning' : 'danger'}" 
+                                 role="progressbar" 
+                                 style="width: ${score}%;">
+                                ${score}%
+                            </div>
+                        </div>
+                        <small>Độ chính xác phát âm</small>
+                    </div>
+                `;
+                
+                document.querySelector('.pronunciation-checker .card-body').appendChild(resultDiv);
+            };
+
+            // Levenshtein distance calculation
+            function levenshteinDistance(a, b) {
+                if (a.length === 0) return b.length;
+                if (b.length === 0) return a.length;
+
+                const matrix = [];
+                for (let i = 0; i <= b.length; i++) {
+                    matrix[i] = [i];
+                }
+                for (let j = 0; j <= a.length; j++) {
+                    matrix[0][j] = j;
+                }
+
+                for (let i = 1; i <= b.length; i++) {
+                    for (let j = 1; j <= a.length; j++) {
+                        if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                            matrix[i][j] = matrix[i - 1][j - 1];
+                        } else {
+                            matrix[i][j] = Math.min(
+                                matrix[i - 1][j - 1] + 1,
+                                matrix[i][j - 1] + 1,
+                                matrix[i - 1][j] + 1
+                            );
+                        }
+                    }
+                }
+                return matrix[b.length][a.length];
+            }
                 
                 document.querySelector('.pronunciation-checker .card-body').appendChild(resultDiv);
             };

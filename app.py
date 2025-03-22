@@ -39,6 +39,51 @@ with app.app_context():
     
     if not Vocabulary.query.first():
         initial_vocabulary = [
+            # Common Verbs
+            Vocabulary(english="walk", vietnamese="đi bộ", example="I walk to school every day."),
+            Vocabulary(english="run", vietnamese="chạy", example="He runs every morning."),
+            Vocabulary(english="write", vietnamese="viết", example="She writes beautiful poems."),
+            Vocabulary(english="read", vietnamese="đọc", example="I read books before bed."),
+            Vocabulary(english="speak", vietnamese="nói", example="Can you speak English?"),
+            Vocabulary(english="listen", vietnamese="nghe", example="Listen to the music."),
+            Vocabulary(english="watch", vietnamese="xem", example="Let's watch a movie."),
+            
+            # Common Nouns
+            Vocabulary(english="computer", vietnamese="máy tính", example="I need a new computer."),
+            Vocabulary(english="phone", vietnamese="điện thoại", example="My phone is broken."),
+            Vocabulary(english="teacher", vietnamese="giáo viên", example="Our teacher is very kind."),
+            Vocabulary(english="student", vietnamese="học sinh", example="She is a good student."),
+            Vocabulary(english="doctor", vietnamese="bác sĩ", example="The doctor helped me."),
+            
+            # Adjectives
+            Vocabulary(english="smart", vietnamese="thông minh", example="You are very smart."),
+            Vocabulary(english="kind", vietnamese="tốt bụng", example="She is a kind person."),
+            Vocabulary(english="busy", vietnamese="bận rộn", example="I'm busy today."),
+            Vocabulary(english="tired", vietnamese="mệt mỏi", example="I feel tired after work."),
+            
+            # Time-related
+            Vocabulary(english="today", vietnamese="hôm nay", example="Today is sunny."),
+            Vocabulary(english="tomorrow", vietnamese="ngày mai", example="See you tomorrow."),
+            Vocabulary(english="yesterday", vietnamese="hôm qua", example="I went shopping yesterday."),
+            Vocabulary(english="week", vietnamese="tuần", example="See you next week."),
+            
+            # Places
+            Vocabulary(english="market", vietnamese="chợ", example="I'm going to the market."),
+            Vocabulary(english="hospital", vietnamese="bệnh viện", example="The hospital is nearby."),
+            Vocabulary(english="park", vietnamese="công viên", example="Let's go to the park."),
+            Vocabulary(english="restaurant", vietnamese="nhà hàng", example="This restaurant is good."),
+            
+            # Feelings
+            Vocabulary(english="love", vietnamese="yêu", example="I love my family."),
+            Vocabulary(english="hate", vietnamese="ghét", example="I hate rainy days."),
+            Vocabulary(english="enjoy", vietnamese="thích thú", example="I enjoy learning English."),
+            Vocabulary(english="worry", vietnamese="lo lắng", example="Don't worry about it."),
+            
+            # Common phrases
+            Vocabulary(english="excuse me", vietnamese="xin lỗi", example="Excuse me, where is the bank?"),
+            Vocabulary(english="of course", vietnamese="dĩ nhiên", example="Of course I can help you."),
+            Vocabulary(english="see you", vietnamese="tạm biệt", example="See you tomorrow."),
+            Vocabulary(english="take care", vietnamese="giữ gìn sức khỏe", example="Goodbye, take care!"),
             Vocabulary(english="hello", vietnamese="xin chào", example="Hello, how are you?"),
             Vocabulary(english="goodbye", vietnamese="tạm biệt", example="Goodbye, see you tomorrow."),
             Vocabulary(english="thank you", vietnamese="cảm ơn", example="Thank you for your help."),
