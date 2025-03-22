@@ -38,7 +38,42 @@ with app.app_context():
     from models import Vocabulary, Exercise, Quiz
     
     if not Vocabulary.query.first():
+        # Basic, Intermediate and Advanced vocabulary
         initial_vocabulary = [
+            # BASIC LEVEL
+            Vocabulary(english="sun", vietnamese="mặt trời", example="The sun is bright today."),
+            Vocabulary(english="moon", vietnamese="mặt trăng", example="The moon shines at night."),
+            Vocabulary(english="star", vietnamese="ngôi sao", example="I can see many stars."),
+            Vocabulary(english="cloud", vietnamese="mây", example="The clouds are white."),
+            Vocabulary(english="rain", vietnamese="mưa", example="It's raining outside."),
+            
+            # INTERMEDIATE LEVEL
+            Vocabulary(english="ambitious", vietnamese="tham vọng", example="She is an ambitious student."),
+            Vocabulary(english="confident", vietnamese="tự tin", example="He feels confident about the test."),
+            Vocabulary(english="anxious", vietnamese="lo lắng", example="I feel anxious before presentations."),
+            Vocabulary(english="determined", vietnamese="kiên quyết", example="She is determined to succeed."),
+            Vocabulary(english="flexible", vietnamese="linh hoạt", example="Our schedule is flexible."),
+            
+            # ADVANCED LEVEL
+            Vocabulary(english="eloquent", vietnamese="hùng biện", example="She gave an eloquent speech."),
+            Vocabulary(english="meticulous", vietnamese="tỉ mỉ", example="He is meticulous in his work."),
+            Vocabulary(english="pragmatic", vietnamese="thực dụng", example="We need a pragmatic solution."),
+            Vocabulary(english="resilient", vietnamese="kiên cường", example="Be resilient in difficult times."),
+            Vocabulary(english="versatile", vietnamese="đa năng", example="She is a versatile artist."),
+            
+            # BUSINESS ENGLISH
+            Vocabulary(english="deadline", vietnamese="thời hạn", example="The project deadline is next week."),
+            Vocabulary(english="negotiate", vietnamese="đàm phán", example="We need to negotiate the terms."),
+            Vocabulary(english="portfolio", vietnamese="danh mục đầu tư", example="Review my investment portfolio."),
+            Vocabulary(english="revenue", vietnamese="doanh thu", example="Our revenue increased this year."),
+            Vocabulary(english="strategy", vietnamese="chiến lược", example="We need a new marketing strategy."),
+            
+            # ACADEMIC ENGLISH
+            Vocabulary(english="hypothesis", vietnamese="giả thuyết", example="Test your hypothesis carefully."),
+            Vocabulary(english="analyze", vietnamese="phân tích", example="Analyze the data thoroughly."),
+            Vocabulary(english="methodology", vietnamese="phương pháp luận", example="Explain your research methodology."),
+            Vocabulary(english="theoretical", vietnamese="lý thuyết", example="This is a theoretical approach."),
+            Vocabulary(english="empirical", vietnamese="thực nghiệm", example="We need empirical evidence."),
             # New Common Objects
             Vocabulary(english="clock", vietnamese="đồng hồ", example="The clock shows 3 PM."),
             Vocabulary(english="mirror", vietnamese="gương", example="I look in the mirror."),
