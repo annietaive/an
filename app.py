@@ -39,6 +39,19 @@ with app.app_context():
     
     if not Vocabulary.query.first():
         initial_vocabulary = [
+            # New Common Objects
+            Vocabulary(english="clock", vietnamese="đồng hồ", example="The clock shows 3 PM."),
+            Vocabulary(english="mirror", vietnamese="gương", example="I look in the mirror."),
+            Vocabulary(english="towel", vietnamese="khăn tắm", example="The towel is wet."),
+            Vocabulary(english="wallet", vietnamese="ví tiền", example="My wallet is in my bag."),
+            Vocabulary(english="umbrella", vietnamese="cái ô", example="Take an umbrella, it's raining."),
+            
+            # New Food Items
+            Vocabulary(english="soup", vietnamese="súp", example="The soup is hot."),
+            Vocabulary(english="salad", vietnamese="sa lát", example="I like fresh salad."),
+            Vocabulary(english="noodles", vietnamese="mì", example="These noodles are delicious."),
+            Vocabulary(english="cake", vietnamese="bánh", example="Happy birthday cake!"),
+            Vocabulary(english="candy", vietnamese="kẹo", example="Children love candy."),
             # Basic Vocabulary
             Vocabulary(english="apple", vietnamese="quả táo", example="I eat an apple every day."),
             Vocabulary(english="book", vietnamese="quyển sách", example="I read a good book."),
@@ -311,7 +324,18 @@ with app.app_context():
             Exercise(question="Fill in: 'The sun ____ in the east.'", answer="rises", options="rises,rise,rising,risen"),
             Exercise(question="Complete: '____ book is very interesting.'", answer="This", options="This,These,That,Those"),
             Exercise(question="Select the correct word: 'She is ____ than me.'", answer="taller", options="taller,tall,tallest,tally"),
-            Exercise(question="Choose the right answer: 'We ____ lunch at noon.'", answer="have", options="have,has,had,having")
+            Exercise(question="Choose the right answer: 'We ____ lunch at noon.'", answer="have", options="have,has,had,having"),
+            # New exercises
+            Exercise(question="Select the correct tense: 'Yesterday, I ____ a movie.'", answer="watched", options="watched,watch,watching,watches"),
+            Exercise(question="Choose the right preposition: 'She arrived ____ the airport.'", answer="at", options="at,in,on,to"),
+            Exercise(question="Complete: 'My sister ____ a doctor.'", answer="is", options="is,are,am,be"),
+            Exercise(question="Fill in: 'They ____ playing football now.'", answer="are", options="are,is,am,was"),
+            Exercise(question="Select the plural form: 'One mouse, two ____'", answer="mice", options="mice,mouses,mouse,mices"),
+            Exercise(question="Choose the correct article: '____ umbrella is blue.'", answer="The", options="The,A,An,This"),
+            Exercise(question="Fill in: 'He ____ his keys yesterday.'", answer="lost", options="lost,lose,loses,losing"),
+            Exercise(question="Complete: 'I ____ my homework every day.'", answer="do", options="do,does,did,done"),
+            Exercise(question="Select the opposite of 'cold':", answer="hot", options="hot,warm,cool,freezing"),
+            Exercise(question="Choose the correct adjective: 'The movie was ____.'", answer="interesting", options="interesting,interested,interest,interests")
         ]
         db.session.add_all(initial_exercises)
         db.session.commit()
@@ -337,7 +361,18 @@ with app.app_context():
             Quiz(question="What is 'bút chì' in English?", answer="pencil", options="pencil,pen,book,paper"),
             Quiz(question="Select the meaning of 'cửa sổ':", answer="window", options="window,door,wall,roof"),
             Quiz(question="'Bàn' translates to which furniture?", answer="table", options="table,chair,bed,desk"),
-            Quiz(question="What does 'sách' mean?", answer="book", options="book,notebook,magazine,newspaper")
+            Quiz(question="What does 'sách' mean?", answer="book", options="book,notebook,magazine,newspaper"),
+            # New quizzes
+            Quiz(question="What does 'nhà bếp' mean?", answer="kitchen", options="kitchen,bathroom,bedroom,living room"),
+            Quiz(question="Select the translation for 'đẹp':", answer="beautiful", options="beautiful,ugly,pretty,nice"),
+            Quiz(question="'Bữa sáng' means which meal?", answer="breakfast", options="breakfast,lunch,dinner,snack"),
+            Quiz(question="What is 'máy bay' in English?", answer="airplane", options="airplane,car,train,bus"),
+            Quiz(question="Choose the word for 'cây cối':", answer="tree", options="tree,flower,plant,grass"),
+            Quiz(question="'Biển' translates to which word?", answer="sea", options="sea,river,lake,ocean"),
+            Quiz(question="What does 'nước' mean?", answer="water", options="water,juice,tea,coffee"),
+            Quiz(question="Select the meaning of 'trái tim':", answer="heart", options="heart,brain,lung,liver"),
+            Quiz(question="'Mùa hè' means which season?", answer="summer", options="summer,winter,spring,autumn"),
+            Quiz(question="What is 'bệnh viện' in English?", answer="hospital", options="hospital,school,library,market")
         ]
         db.session.add_all(initial_quizzes)
         db.session.commit()
