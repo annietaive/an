@@ -6,47 +6,56 @@
 <div class="container">
     <h1 class="mb-4">Kiểm Tra Phát Âm</h1>
 
-    <div class="card mb-4">
-        <div class="card-body">
-            <p>Luyện phát âm bằng cách đọc các từ sau. Nhấn nút để bắt đầu ghi âm và kiểm tra phát âm của bạn.</p>
-        </div>
-    </div>
-
-    <div class="pronunciation-checker mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h3 class="word-to-pronounce mb-3">Hello</h3>
-                <div class="d-flex justify-content-center gap-3">
-                    <button id="listenButton" class="btn btn-info">
-                        <i class="fas fa-volume-up"></i> Nghe mẫu
-                    </button>
-                    <button id="recordButton" class="btn btn-primary">
-                        <i class="fas fa-microphone"></i> Bắt đầu ghi âm
-                    </button>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Luyện Phát Âm</h5>
                 </div>
-                <div id="recordingStatus" class="text-center mt-3 d-none">
-                    <div class="spinner-grow text-primary" role="status">
-                        <span class="visually-hidden">Đang ghi âm...</span>
+                <div class="card-body">
+                    <h3 class="word-to-pronounce mb-3" id="currentWord">{{ current_word }}</h3>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button id="listenButton" class="btn btn-info">
+                            <i class="fas fa-volume-up"></i> Nghe mẫu
+                        </button>
+                        <button id="recordButton" class="btn btn-primary">
+                            <i class="fas fa-microphone"></i> Bắt đầu ghi âm
+                        </button>
                     </div>
-                    <p>Đang ghi âm...</p>
+                    <div id="recordingStatus" class="text-center mt-3 d-none">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="visually-hidden">Đang ghi âm...</span>
+                        </div>
+                        <p>Đang ghi âm...</p>
+                    </div>
+                    <div id="pronunciationScore" class="mt-3"></div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="mt-4">
-        <h4>Hướng dẫn</h4>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <i class="fas fa-info-circle text-info"></i> Nhấn "Nghe mẫu" để nghe cách phát âm chuẩn
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-microphone text-info"></i> Nhấn "Bắt đầu ghi âm" và đọc từ hiển thị
-            </li>
-            <li class="list-group-item">
-                <i class="fas fa-check text-info"></i> Hệ thống sẽ tự động dừng ghi âm sau 3 giây
-            </li>
-        </ul>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">5 Từ Mới Hôm Nay</h5>
+                </div>
+                <div class="card-body">
+                    <div class="daily-words">
+                        {% for word in daily_words %}
+                        <div class="vocab-item mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="english-word">{{ word.english }}</span>
+                                <button class="audio-btn btn btn-link" data-word="{{ word.english }}">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="vietnamese-translation">{{ word.vietnamese }}</div>
+                            <div class="example-sentence">{{ word.example }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -57,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const listenButton = document.getElementById('listenButton');
     const recordButton = document.getElementById('recordButton');
     const recordingStatus = document.getElementById('recordingStatus');
+    const pronunciationScore = document.getElementById('pronunciationScore');
     const wordToSpeak = document.querySelector('.word-to-pronounce').textContent;
 
     listenButton.addEventListener('click', function() {
@@ -69,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             recordingStatus.classList.remove('d-none');
             recordButton.disabled = true;
+            pronunciationScore.innerHTML = '';
 
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
@@ -81,65 +92,36 @@ document.addEventListener('DOMContentLoaded', function() {
             recognition.onresult = function(event) {
                 const spokenText = event.results[0][0].transcript.toLowerCase();
                 const confidence = event.results[0][0].confidence;
-                let score = Math.round(confidence * 100);
+                const score = Math.round(confidence * 100);
 
-                // Calculate similarity
-                const similarity = calculateSimilarity(spokenText, wordToSpeak.toLowerCase());
-                score = Math.round((score + similarity) / 2);
-
-                const resultDiv = document.createElement('div');
-                resultDiv.className = 'mt-3 text-center';
-
-                let feedback;
+                let feedbackClass, feedbackTitle;
                 if (score >= 90) {
-                    feedback = {
-                        class: 'alert-success',
-                        title: 'Tuyệt vời! 🎉',
-                        message: 'Phát âm hoàn hảo!'
-                    };
+                    feedbackClass = 'success';
+                    feedbackTitle = 'Tuyệt vời! 🎉';
                 } else if (score >= 75) {
-                    feedback = {
-                        class: 'alert-info',
-                        title: 'Rất tốt! 👍',
-                        message: 'Phát âm khá chính xác'
-                    };
+                    feedbackClass = 'info';
+                    feedbackTitle = 'Rất tốt! 👍';
                 } else if (score >= 60) {
-                    feedback = {
-                        class: 'alert-warning',
-                        title: 'Tạm được',
-                        message: 'Cần cải thiện một chút'
-                    };
+                    feedbackClass = 'warning';
+                    feedbackTitle = 'Tạm được';
                 } else {
-                    feedback = {
-                        class: 'alert-danger',
-                        title: 'Cần cố gắng hơn',
-                        message: 'Hãy thử lại'
-                    };
+                    feedbackClass = 'danger';
+                    feedbackTitle = 'Cần cố gắng hơn';
                 }
 
-                resultDiv.innerHTML = `
-                    <div class="alert ${feedback.class}">
-                        <h5>${feedback.title}</h5>
-                        <p>${feedback.message}</p>
+                pronunciationScore.innerHTML = `
+                    <div class="alert alert-${feedbackClass} mt-3">
+                        <h5>${feedbackTitle}</h5>
                         <p>Bạn nói: "${spokenText}"</p>
                         <p>Từ đúng: "${wordToSpeak}"</p>
                         <div class="progress mb-2">
-                            <div class="progress-bar bg-${score >= 75 ? 'success' : score >= 60 ? 'warning' : 'danger'}" 
+                            <div class="progress-bar bg-${feedbackClass}" 
                                  role="progressbar" 
                                  style="width: ${score}%;">
                                 ${score}%
                             </div>
                         </div>
-                        <small>Độ chính xác phát âm</small>
-                    </div>
-                `;
-
-                document.querySelector('.pronunciation-checker .card-body').appendChild(resultDiv);
-            };
-
-            recognition.onerror = function(event) {
-                console.error('Speech recognition error:', event.error);
-                alert('Có lỗi xảy ra khi nhận dạng giọng nói. Vui lòng thử lại.');
+                    </div>`;
             };
 
             setTimeout(() => {
@@ -156,21 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
             recordButton.disabled = false;
         }
     });
-
-    function calculateSimilarity(str1, str2) {
-        const len1 = str1.length;
-        const len2 = str2.length;
-        const maxLen = Math.max(len1, len2);
-        let matches = 0;
-
-        for (let i = 0; i < maxLen; i++) {
-            if (str1[i] === str2[i]) {
-                matches++;
-            }
-        }
-
-        return (matches / maxLen) * 100;
-    }
 });
 </script>
 {% endblock %}

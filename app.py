@@ -286,7 +286,19 @@ def progress():
 
 @app.route('/pronunciation')
 def pronunciation():
-    return render_template('pronunciation.html')
+    # Get random word for pronunciation practice
+    words = models.Vocabulary.query.all()
+    current_word = random.choice(words).english if words else "Hello"
+    
+    # Get 5 random words for daily practice
+    if len(words) >= 5:
+        daily_words = random.sample(words, 5)
+    else:
+        daily_words = words
+    
+    return render_template('pronunciation.html', 
+                         current_word=current_word,
+                         daily_words=daily_words)
 
 @app.route('/resources')
 def resources():
