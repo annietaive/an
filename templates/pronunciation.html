@@ -75,14 +75,56 @@ document.addEventListener('DOMContentLoaded', function() {
             const mediaRecorder = new MediaRecorder(stream);
             const audioChunks = [];
 
+            let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
             mediaRecorder.addEventListener("dataavailable", event => {
                 audioChunks.push(event.data);
             });
 
             mediaRecorder.start();
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const spokenText = event.results[0][0].transcript.toLowerCase();
+                const confidence = event.results[0][0].confidence;
+                const score = Math.round(confidence * 100);
+                
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'mt-3 text-center';
+                
+                if (spokenText === wordToSpeak.toLowerCase()) {
+                    resultDiv.innerHTML = `
+                        <div class="alert alert-success">
+                            <h5>Tuyệt vời! 🎉</h5>
+                            <p>Phát âm chính xác</p>
+                            <p>Điểm: ${score}/100</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="alert alert-warning">
+                            <h5>Gần đúng</h5>
+                            <p>Bạn nói: "${spokenText}"</p>
+                            <p>Từ đúng: "${wordToSpeak}"</p>
+                            <p>Điểm: ${score}/100</p>
+                        </div>
+                    `;
+                }
+                
+                document.querySelector('.pronunciation-checker .card-body').appendChild(resultDiv);
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+                alert('Có lỗi xảy ra khi nhận dạng giọng nói. Vui lòng thử lại.');
+            };
             
             setTimeout(() => {
                 mediaRecorder.stop();
+                recognition.stop();
                 stream.getTracks().forEach(track => track.stop());
                 recordingStatus.classList.add('d-none');
                 recordButton.disabled = false;
